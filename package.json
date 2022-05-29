@@ -1,0 +1,33 @@
+{
+	"name": "tilelayoutwizard-com",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Trevor Plassman",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "^8.16.0",
+		"eslint-config-standard": "^17.0.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-n": "^15.2.0",
+		"eslint-plugin-promise": "^6.0.0"
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"es2021": true
+		},
+		"extends": [
+			"standard"
+		],
+		"parserOptions": {
+			"ecmaVersion": 12,
+			"sourceType": "module"
+		},
+		"rules": {
+		}
+	}
+}

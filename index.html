@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Tile Layout Wizard</title>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<h1>Tile Layout Wizard</h1>
+		<main>
+			<form method="get">
+				<fieldset>
+					<legend>Room</legend>
+					<label for="room-units">
+						Units
+						<select id="room-units" name="roomUnits">
+							<option value="feet" selected>Feet</option>
+							<option value="inches">Inches</option>
+						</select>
+					</label>
+					<label aria-hidden="true"><!--layouthack--></label>
+					<label for="room-width">
+						Width
+						<input id="room-width" name="roomWidth" type="number" min="1" value="5" />
+					</label>
+					<label for="room-length">
+						Length
+						<input id="room-length" name="roomLength" type="number" min="1" value="7" />
+					</label>
+				</fieldset>
+				<fieldset>
+					<legend>Tile</legend>
+					<label for="tile-units">
+						Units
+						<select id="tile-units" name="tileUnits">
+							<option value="inches" selected>Inches</option>
+							<option value="feet">Feet</option>
+						</select>
+					</label>
+					<label for="grout-thickness">
+						Grout Thickness
+						<select id="grout-thickness" name="groutThickness">
+							<option value="0.0625">1/16</option>
+							<option value="0.125" selected>1/8</option>
+							<option value="0.1875">3/16</option>
+							<option value="0.25">1/4</option>
+						</select>
+					</label>
+					<label for="tile-width">
+						Width
+						<input id="tile-width" name="tileWidth" type="number" min="1" value="8" />
+					</label>
+					<label for="tile-length">
+						Length
+						<input id="tile-length" name="tileLength" type="number" min="1" value="12" />
+					</label>
+					<fieldset>
+						<legend>Alignment</legend>
+						<label for="alignment-standard">
+							<input id="alignment-standard" name="alignment" value="standard" type="radio" checked />
+							&nbsp;Standard
+						</label>
+						<label for="alignment-x-brick">
+							<input id="alignment-x-brick" name="alignment" value="x-brick" type="radio" />
+							&nbsp;Horizontal Brick
+						</label>
+						<label for="alignment-y-brick">
+							<input id="alignment-y-brick" name="alignment" value="y-brick" type="radio" />
+							&nbsp;Vertical Brick
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Start</legend>
+						<label for="start-x">
+							Left&nbsp;
+							<input id="start-x" name="startX" type="range" min="0" step="1" max="2" />
+							&nbsp;Right
+						</label>
+						<label for="start-y">
+							Top&nbsp;
+							<input id="start-y" name="startY" type="range" min="0" step="1" max="2" />
+							&nbsp;Bottom
+						</label>
+					</fieldset>
+				</fieldset>
+			</form>
+			<ul>
+				<li><strong>Tiles Needed: </strong><em>N/A</em></li>
+				<li><strong>Length Cut: </strong><em>N/A</em></li>
+				<li><strong>Width Cut: </strong><em>N/A</em></li>
+			</ul>
+		</main>
+		<aside>
+			<canvas></canvas>
+		</aside>
+		<script src="index.js"></script>
+	</body>
+</html>

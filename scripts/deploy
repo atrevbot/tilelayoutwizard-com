@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source .env
+
+REMOTE_USER=$PROD_USER
+REMOTE_HOST=$PROD_HOST
+
+rsync index.* $REMOTE_USER@$REMOTE_HOST:/var/www/tilelayoutwizard-com/html/
