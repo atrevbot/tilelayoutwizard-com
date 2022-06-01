@@ -16,7 +16,7 @@ function handleDOMContentLoaded () {
     roomWidth,
     roomLength,
     tileUnits,
-    groutThickness,
+    groutWidth,
     tileWidth,
     tileLength,
     alignment,
@@ -47,26 +47,26 @@ function handleDOMContentLoaded () {
     const rw = toBaseUnits(roomY, roomUnits.value, scale)
     const tl = toBaseUnits(tileX, tileUnits.value, scale)
     const tw = toBaseUnits(tileY, tileUnits.value, scale)
-    const gt = toBaseUnits(parseFloat(groutThickness.value, 10), 'inches', scale)
-    const tilesInLength = getCountInSpan(rl, tl, gt)
-    const tilesInWidth = getCountInSpan(rw, tw, gt)
-    const xRem = getRemainingLength(rl, tl, gt)
-    const yRem = getRemainingLength(rw, tw, gt)
+    const gw = toBaseUnits(parseFloat(groutWidth.value, 10), 'inches', scale)
+    const tilesInLength = getCountInSpan(rl, tl, gw)
+    const tilesInWidth = getCountInSpan(rw, tw, gw)
+    const xRem = getRemainingLength(rl, tl, gw)
+    const yRem = getRemainingLength(rw, tw, gw)
     const xOffset = {
       2: (tl - xRem) * -1, // Right
-      1: gt + xRem / 2 // Center
-    }[xPos] || gt
+      1: gw + xRem / 2 // Center
+    }[xPos] || gw
     const yOffset = {
       2: (tw - yRem) * -1, // Bottom
-      1: gt + yRem / 2 // Center
-    }[yPos] || gt
+      1: gw + yRem / 2 // Center
+    }[yPos] || gw
     const tiles = getRange(tilesInLength + 2, -1).flatMap(i =>
       getRange(tilesInWidth + 2, -1).map(j => {
-        const xShift = xBricked && j % 2 !== 0 ? (tl / 2) + gt : 0
-        const yShift = yBricked && i % 2 !== 0 ? (tw / 2) + gt : 0
+        const xShift = xBricked && j % 2 !== 0 ? (tl / 2) + gw : 0
+        const yShift = yBricked && i % 2 !== 0 ? (tw / 2) + gw : 0
 
         return [
-          [i * (tl + gt) + xOffset + xShift, j * (tw + gt) + yOffset + yShift],
+          [i * (tl + gw) + xOffset + xShift, j * (tw + gw) + yOffset + yShift],
           [tl, tw]
         ]
       }))
@@ -84,7 +84,7 @@ function handleDOMContentLoaded () {
   }
 
   window.addEventListener('resize', handleChange);
-  [roomUnits, roomWidth, roomLength, tileUnits, groutThickness, tileWidth, tileLength, ...alignment]
+  [roomUnits, roomWidth, roomLength, tileUnits, groutWidth, tileWidth, tileLength, ...alignment]
     .forEach(input => input.addEventListener('change', handleChange));
   [startX, startY]
     .forEach(input => input.addEventListener('input', handleChange))
