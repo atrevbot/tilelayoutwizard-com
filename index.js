@@ -40,7 +40,7 @@ function handleDOMContentLoaded () {
     const xBricked = alignment.value === 'x-brick'
     const yBricked = alignment.value === 'y-brick'
     const [xPos, yPos] = [startX.value, startY.value]
-    const scale = roomX / roomY > canvasCont.offsetWidth / contY
+    const scale = roomX / roomY > contX / contY
       ? fromBaseUnits(contX, roomUnits.value, roomX) // Landscape
       : fromBaseUnits(contY, roomUnits.value, roomY) // Portrait
     const rl = toBaseUnits(roomX, roomUnits.value, scale)
