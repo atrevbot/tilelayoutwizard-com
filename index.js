@@ -6,10 +6,6 @@ const toBaseUnits = (value, units, scale) => ({
 const fromBaseUnits = (value, units, scale) => ({
   feet: value / scale / 12
 }[units] || value / scale) // Inches
-const getScale = ([contX, contY], [roomX, roomY], roomUnits) =>
-  roomX / roomY > contX / contY
-    ? fromBaseUnits(contX, roomUnits, roomX)
-    : fromBaseUnits(contY, roomUnits, roomY)
 const getCountInSpan = (span, col, gap) => Math.floor(span / (col + gap))
 const getRemainingLength = (span, col, gap) => (span % (col + gap)) - gap
 
@@ -38,18 +34,19 @@ function handleDOMContentLoaded () {
   const ctx = canvas.getContext('2d')
 
   function handleChange () {
+    const [contX, contY] = [canvasCont.offsetWidth, canvasCont.offsetHeight]
+    const [roomX, roomY] = [roomLength.valueAsNumber, roomWidth.valueAsNumber]
+    const [tileX, tileY] = [tileLength.valueAsNumber, tileWidth.valueAsNumber]
     const xBricked = alignment.value === 'x-brick'
     const yBricked = alignment.value === 'y-brick'
     const [xPos, yPos] = [startX.value, startY.value]
-    const scale = getScale(
-      [canvasCont.offsetWidth, canvasCont.offsetHeight],
-      [roomLength.valueAsNumber, roomWidth.valueAsNumber],
-      roomUnits.value
-    )
-    const rl = toBaseUnits(roomLength.valueAsNumber, roomUnits.value, scale)
-    const rw = toBaseUnits(roomWidth.valueAsNumber, roomUnits.value, scale)
-    const tl = toBaseUnits(tileLength.valueAsNumber, tileUnits.value, scale)
-    const tw = toBaseUnits(tileWidth.valueAsNumber, tileUnits.value, scale)
+    const scale = roomX / roomY > canvasCont.offsetWidth / contY
+      ? fromBaseUnits(contX, roomUnits.value, roomX) // Landscape
+      : fromBaseUnits(contY, roomUnits.value, roomY) // Portrait
+    const rl = toBaseUnits(roomX, roomUnits.value, scale)
+    const rw = toBaseUnits(roomY, roomUnits.value, scale)
+    const tl = toBaseUnits(tileX, tileUnits.value, scale)
+    const tw = toBaseUnits(tileY, tileUnits.value, scale)
     const gt = toBaseUnits(parseFloat(groutThickness.value, 10), 'inches', scale)
     const tilesInLength = getCountInSpan(rl, tl, gt)
     const tilesInWidth = getCountInSpan(rw, tw, gt)
